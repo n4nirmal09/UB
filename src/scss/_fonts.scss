@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Renogare';
+    src: url('#{$font-path}/Renogare-Regular.eot');
+    src: url('#{$font-path}/Renogare-Regular.eot?#iefix') format('embedded-opentype'),
+        url('#{$font-path}/Renogare-Regular.woff2') format('woff2'),
+        url('#{$font-path}/Renogare-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Didot';
+    src: url('#{$font-path}/Didot-HTF-M06-Medium.eot');
+    src: url('#{$font-path}/Didot-HTF-M06-Medium.eot?#iefix') format('embedded-opentype'),
+        url('#{$font-path}/Didot-HTF-M06-Medium.woff2') format('woff2'),
+        url('#{$font-path}/Didot-HTF-M06-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}

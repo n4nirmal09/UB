@@ -1,0 +1,259 @@
+$image-path: '../img';
+$font-path: '../fonts';
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$screen-sm: 576px;
+$screen-md: 992px;
+$screen-lg: 1025px;
+$screen-xl: 1200px;
+$screen-xxl: 1400px;
+$screen-full: 1920px;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: $screen-sm,
+  md: $screen-md,
+  lg: $screen-lg,
+  xl: $screen-xl,
+  xxl: $screen-xxl 
+); 
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: (1395px + 30px),
+  xxl: (1395px + 30px)
+);
+ 
+//
+// Color system
+//
+
+// stylelint-disable
+$white:    #fff !default;
+$gray-100: #f6f6f6;
+$gray-200: #e2e0de;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #515659;
+$gray-900: #333333;
+$black:    #000 !default;
+
+$grays: () !default;
+$grays: map-merge((
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+), $grays);
+
+$blue:    #1d507a;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #ef5253;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #29cb6c;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$colors: () !default;
+$colors: map-merge((
+  "blue":       $blue,
+  "indigo":     $indigo,
+  "purple":     $purple,
+  "pink":       $pink,
+  "red":        $red,
+  "orange":     $orange,
+  "yellow":     $yellow,
+  "green":      $green,
+  "teal":       $teal,
+  "cyan":       $cyan,
+  "white":      $white,
+  "gray":       $gray-600,
+  "gray-dark":  $gray-800,
+  "gray-darker": $gray-900
+), $colors);
+
+$primary:       $green;
+$secondary:     #17181b;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         #fff;
+$dark:          $gray-800 !default;
+$seperator-color: $gray-200;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "grey":       $gray-100,
+  "gray-dark":  $gray-500,
+  "gray-darker": $gray-900, 
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "error":      $danger,
+  "light":      $light,
+  "dark":       $dark,
+  "black":      #000
+), $theme-colors);
+
+$fade-percentage: 0.2;
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg:                   $white;
+$body-color:                $black;
+
+// Spacer
+$spacer: 2rem;
+
+
+// Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+
+// stylelint-disable value-keyword-case
+$font-family-sans-serif:      'Montserrat', sans-serif;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:            $font-family-sans-serif !default;
+$font-family-secondary: 'Unna', serif;
+$headings-font-family:   $font-family-sans-serif;
+$headings-font-weight: 700;
+$headings-line-height: 1.15;
+$buttons-font-family: $font-family-secondary;
+// stylelint-enable value-keyword-case
+
+$font-size-root: 			  16px; 
+$font-size-root-sm: 14px; 
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg:                ($font-size-base * 1.25) !default;
+$font-size-sm:                (17px / $font-size-root) * 1rem; 
+
+$font-weight-light:           300;
+$font-weight-normal:          400;
+$font-weight-medium: 		      500;
+$font-weight-bold:            700;
+$font-weight-extra-bold:      800;
+
+$font-weight-base:            $font-weight-normal; 
+$line-height-base:            1.4 !default;
+
+$h1-font-size:                (28px / $font-size-root) * 1rem; 
+$h2-font-size:                (26px / $font-size-root) * 1rem; 
+$h3-font-size:                (24px / $font-size-root) * 1rem; 
+$h4-font-size:                (22px / $font-size-root) * 1rem; 
+$h5-font-size:                (18px / $font-size-root) * 1rem; 
+$h6-font-size:                $font-size-base !default;
+
+$lead-font-size:              (35px / $font-size-root) * 1rem; 
+$lead-font-weight:            300 !default;
+
+$small-font-size: (14px / $font-size-root) * 1rem;
+$large-font-size: (18px / $font-size-root) * 1rem;
+
+
+
+// Components
+//
+// components active
+$component-active-bg: $secondary; 
+// Define common padding and border radius sizes and more.
+
+$line-height-lg:              1.5 !default;
+$line-height-sm:              1.5 !default;
+
+$border-width:                1px !default;
+$border-color:                $gray-300 !default;
+
+$border-radius:               (3px / $font-size-root) * 1rem;
+$border-radius-lg:            (3px / $font-size-root) * 1rem;
+$border-radius-sm:            (3px / $font-size-root) * 1rem;
+
+// Buttons + Forms
+//
+// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+
+$input-btn-padding-y:         (10px / $font-size-root) * 1rem;
+$input-btn-padding-x:         (30px / $font-size-root) * 1rem;
+$input-btn-line-height:       1; 
+
+$input-btn-padding-y-sm:      (8px / $font-size-root) * 1rem;
+$input-btn-padding-x-sm:      (22px / $font-size-root) * 1rem;
+$input-btn-line-height-sm:    1;
+
+$input-btn-padding-y-lg:      (20px / $font-size-root) * 1rem;
+$input-btn-padding-x-lg:      (60px / $font-size-root) * 1rem;  
+$input-btn-line-height-lg:    1;
+
+$input-btn-border-width:      $border-width !default;
+$input-font-family: $font-family-secondary;
+
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background, and border color.
+
+$btn-padding-y:               $input-btn-padding-y !default;
+$btn-padding-x:               $input-btn-padding-x !default;
+$btn-line-height:             $input-btn-line-height !default;
+
+$btn-padding-y-sm:            $input-btn-padding-y-sm !default;
+$btn-padding-x-sm:            $input-btn-padding-x-sm !default;
+$btn-line-height-sm:          $input-btn-line-height-sm !default;
+
+$btn-padding-y-lg:            $input-btn-padding-y-lg !default;
+$btn-padding-x-lg:            $input-btn-padding-x-lg !default;
+$btn-line-height-lg:          $input-btn-line-height-lg !default;
+
+$btn-border-width:            $input-btn-border-width !default;
+
+$btn-font-weight:             700;
+$btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
+$btn-disabled-opacity:        .65 !default;
+$btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
+
+$btn-link-disabled-color:     $gray-600 !default;
+
+$btn-block-spacing-y:         .5rem !default;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius:           $border-radius !default;
+$btn-border-radius-lg:        $border-radius-lg !default;
+$btn-border-radius-sm:        $border-radius-sm !default;
+
+// margin bottoms
+$headings-margin-bottom:      2rem;
+$paragraph-margin-bottom:   1.5rem;
+$hr-margin-y: .8rem;
+
+// shadows
+$elevate-1: 0 0 2px 2px rgba($black, .075);
+
+$elevates: ( 
+  'elevate-1': 0 0 2px 2px rgba($black, .075)
+);
+
+// Editor styles
+$editor-body-size: 16px;
+$editor-body-line-height: 1.9;
+$editor-heading-line-height: 1.6;

@@ -1,0 +1,152 @@
+.feature-lists
+{
+	width: 100%;
+	.feature-grid + .feature-grid
+	{
+		margin-top: 4%;
+	}
+}
+
+.feature-grid
+{
+	display: flex;
+	width: 100%;
+	flex-flow: row wrap;
+	> *{
+		flex: 1;
+	}
+	min-height: 120px;
+	
+	background: $primary;
+
+	.icon-holder{
+		max-width: 40%;
+		padding: 5%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@include media-breakpoint-up(xxl){
+			max-width: 30%;
+		}
+		background: $secondary;
+		img,svg{
+			display: block;
+			max-width: 60%;
+    		max-height: 60%;
+		}
+	}
+	.text-holder{
+		padding: 2%;
+		color: $light;
+		text-align: center;
+		align-self: center;
+		font-weight: 500;
+	}
+	@include media-breakpoint-down(xs){
+		height: auto;
+		.text-holder{
+			padding:5% 2%;
+		}
+		.icon-holder{
+
+			max-width: 100%;
+			img,svg{
+				max-width: 60px;
+			}
+		}
+		> *{
+			flex: 0 0 100%;
+		}
+	}
+}
+
+.facts-list{
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%; 
+
+	> .fact-grid{
+		flex: 1;
+	}
+
+	@include media-breakpoint-down(md){
+		> .fact-grid{
+			flex: 0 0 50%!important; 
+		}
+	}
+}
+.fact-grid{
+	padding: 2%;
+	
+	.icon-holder{
+		width: 100%;
+		height: 10vh;
+		min-height: 120px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		img,svg{
+			
+			display: block;
+			max-width: 50%;
+			max-height: 100%;
+			margin: 0 auto;
+		}
+		
+		
+	}
+	.text-holder{
+		padding: 1rem 0;
+		width: 100%;
+		font-weight: 500;
+		text-align: center;
+	}
+
+	@include media-breakpoint-down(md){
+		.icon-holder{
+		width: 100%;
+		height: 120px;
+	   }
+	}
+}
+
+.seperated-lists
+{
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	> li{
+		> a{
+			display: block;
+			padding: 5px 10px;
+			color: $secondary;
+			font-weight: 500;
+			text-decoration: none;
+			position: relative;
+			&:after{
+				position: absolute;
+				width: 60%;
+				border-bottom: 2px solid;
+				left: 0;
+				right: 0;
+				bottom: 2px;
+				margin: 0 auto;
+				content: '';
+				opacity: 0;
+			}
+		}
+		&:hover,&.active{
+			> a{
+				&:after{
+					opacity: 1;
+				}
+			}
+		}
+	}
+	li + li {
+		border-left: 1px solid
+	}
+}

@@ -1,0 +1,38 @@
+html {
+  font-size: $font-size-root;
+}
+
+body{
+	font-weight: $font-weight-base;
+}
+
+.vw-small{
+	font-size: $small-font-size;
+}
+
+.vw-large{
+  font-size: $large-font-size;
+}
+
+// Vw only after mobile scrrens
+@include media-breakpoint-up(md) {
+  body {
+    font-size: calculateVw(30px, $screen-full);
+  }
+
+  h1,.h1 {
+    font-size: calculateVw(73px, $screen-full);
+  }
+  h2,.h2 {
+    font-size: calculateVw(60px, $screen-full);
+  }
+	
+  .vw-small{
+  	font-size: calculateVw(20px, $screen-full);
+  }
+
+  .vw-large{
+    font-size: calculateVw(40px, $screen-full);
+  }
+
+}

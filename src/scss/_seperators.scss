@@ -1,0 +1,12 @@
+hr{
+	&.primary{
+		background: $primary;
+		height: 10px;
+		width: 100%;
+	}
+	&.black{
+		background: $black;
+		height: 10px;
+		width: 100%;
+	}
+}

@@ -1,0 +1,26 @@
+@import "./base/variables",
+		"./base/mixins";
+
+/* Vendors */
+@import "./vendors/bootstrap/bootstrap";
+
+/*!
+ * Theme: Urban Weavers theme v1.0
+ * Author: Nirmal
+ */
+
+ @import "./fonts",
+ 		 "./animations",
+ 		 "./typ",
+ 		 "./layout",
+ 		 "./covers-flaps",
+ 		 "./main-loader",
+ 		 "./banners",
+ 		 "./components",
+ 		 "./image-gallery-grid",
+ 		 "./navigation",
+ 		 "./seperators",
+ 		 "./utility";
+
+ 
+

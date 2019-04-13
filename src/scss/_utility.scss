@@ -1,0 +1,26 @@
+// Typ
+.ft-secondary{
+	font-family: $font-family-secondary;
+}
+.ft-headings{
+	font-family: $headings-font-family;
+}
+.ft-medium{
+	font-weight: 500;
+}
+.ft-strong{
+	font-weight: 700;
+}
+
+// Colors
+@each $color, $value in $theme-colors {
+  .bg-#{$color}-#{fade}
+  {
+  	background: fade-out($value, $fade-percentage);
+  }
+
+  .fill-#{$color}
+  {
+  	fill: $value;
+  }
+}
