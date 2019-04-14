@@ -24,3 +24,9 @@
   	fill: $value;
   }
 }
+
+.text-link{
+  &:hover,&:active{
+    text-decoration: none;
+  }
+}

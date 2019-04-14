@@ -1,0 +1,144 @@
+.accordian-trigger {
+  position: relative;
+  cursor: pointer;
+}
+
+.accordian-trigger:not(.quick-link-title):not(h4) {
+  
+  cursor: pointer;
+  //border-right: 6px solid #1ab9ab;
+  position: relative;
+  margin-bottom: 14px;
+  padding: 1rem;
+  padding-left: 2.5rem;
+}
+
+.accordian-trigger .number {
+  //color: $primary-lighter;
+  font-weight: 500;
+  font-size: calculateRem(30px, $font-size-root);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.accordian-trigger:before {
+  content: "+";
+  //color: $primary-lighter;
+  font-weight: 500;
+  font-size: calculateRem(30px, $font-size-root);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  //transition: .4s ease
+  text-align: center;
+}
+
+.accordian-trigger.active:before {
+  content: "-";
+  font-size: 3rem;
+    font-weight: 100;
+}
+
+.accordian-panel {
+  //max-height: 0;
+  overflow: hidden;
+  display: none;
+}
+
+ol.accordian-wrapper
+{
+  padding-left: 0;
+}
+.accordian-wrapper {
+      list-style: none;
+  &.adder-theme {
+    .accordian-trigger {
+      padding: 1rem;
+      padding-left: 0;
+      padding-right: 2.5rem;
+
+      &:before {
+        left: auto;
+        right: 10px;
+        color: inherit;
+      }
+
+      //font-weight: 500;
+      margin-bottom: 10px;
+      border-bottom: 1px solid $secondary;
+
+      h4 {
+        margin: 0;
+        font-weight: 400;
+      }
+
+      &.with-icon {
+        margin-left: 60px;
+        position: relative;
+
+        .accordian-icon {
+          max-width: 40px;
+          position: absolute;
+          left: -60px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        &+.accordian-panel {
+          margin-left: 50px;
+        }
+      }
+    }
+  }
+
+  &.white-seperator
+  {
+    .accordian-trigger{
+      border-bottom: 1px solid #fff;
+    }
+  }
+
+  &.arrow-theme {
+    .accordian-trigger {
+      padding-right: 40px!important;
+      padding-left: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      margin-bottom: 0;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      &:before{
+        display: none;
+      }
+      &:after { 
+        margin-left: 20px;
+        position: static;
+        display: inline-block;
+        left: auto;
+        right: 10px;
+        width: 12px;
+        height: 12px;
+        top: 50%!important;
+        //left: -20px;
+        border-left: 2px solid;
+        border-bottom: 2px solid;
+        margin-top: -5px;
+        transform-origin: center center;
+        content: "";
+        transform: rotate(-45deg) ;
+      }
+      &.active {
+        //color:  $primary-lighter;
+          &:after {
+            //border-color: $primary-lighter;
+            transform: rotateX(-180deg) rotate(-45deg) ;
+          }
+        }
+    }
+  }
+}
+

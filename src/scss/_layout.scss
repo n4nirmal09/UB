@@ -13,3 +13,21 @@ body{
 	}
 }
 
+
+.content-scroller
+{
+	@include media-breakpoint-up(sm){
+		height: 100vh;
+		overflow: hidden;
+		overflow-y: auto;
+		position: relative;
+		z-index: 2;
+	}
+	
+}
+
+
+.fp-scroller
+{
+	transition: transform ease 0.3s!important;
+}

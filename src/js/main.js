@@ -10,6 +10,9 @@
       this.resizeListener()
       this.navigationTrigger()
       this.smoothScrolls()
+      this.popupGallery()
+      this.accordian()
+      this.progressCircleInit()
       //this.bodyScroll()
     },
 
@@ -18,7 +21,8 @@
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
       scrollBarWidth: 0,
-      scrollClassTrigger: 0
+      scrollClassTrigger: 0,
+      fullpage: null
     },
 
     // Debounce function to optimize event listeners. we dont want it fire every time.
@@ -73,22 +77,30 @@
     loaderAnimation() {
       let loaderWrapper = $('#main-loader'),
       mainWrapper = "#main-wrapper",
+      mainHeader = "#main-header",
       logoHolder = loaderWrapper.find('.logo-holder'),
       tl = new TimelineMax({
         onComplete() {
           $('body').css("padding-right", '0')
+          // $('#main-header').css("padding-right", '0')
           $('html').addClass('finished-loading-anim')
+          UB.fullPageSliders()
           UB.detectAnimation()
         }
       })
 
-      $('body,#main-header').css("padding-right", S.scrollBarWidth + 'px')
+      $('body').css("padding-right", S.scrollBarWidth + 'px')
 
       tl.to(loaderWrapper,0.5,{autoAlpha: 1, delay: 0.5})
       .staggerFrom(logoHolder.find('path'),0.5,{y: 100, autoAlpha: 0, ease: Power1.easeOut},0.1,'entry')
       .staggerTo(logoHolder.find('path'),0.5,{y: -100, autoAlpha: 0, ease: Power1.easeOut},-0.1,'entry+=1')
-      .to(mainWrapper,0.5,{autoAlpha: 1},1.5)
+      .to([mainWrapper],0.5,{autoAlpha: 1},1.5)
       .to(loaderWrapper,0.5,{autoAlpha:0, display:"none"})
+    },
+
+    // ProgressCircleInit
+    progressCircleInit() {
+        TweenLite.set('.progress-circular__overlay',{drawSVG:"0% 0%", rotation: -90, transformOrigin:"50% 50%"})
     },
 
     // Scrollbar width
@@ -196,6 +208,26 @@
       
     },
 
+    // CircleProgressAnimation
+    circleProgressAnimation(grid) {
+      let value = $(grid).data('percent'),
+      tl = new TimelineMax(),
+      speed = 1,
+      overlay = $(grid).find('.progress-circular__overlay'),
+      number = $(grid).find('.percent > .number'),
+      counter = {cValue:0 }
+
+     
+      tl.from(grid,0.5,{autoAlpha: 0})
+      .to(overlay,1,{drawSVG:"0% "+value+"%", ease:Power2.easeOut,})
+      .to(counter,1,{cValue: value, roundProps:"cValue", onUpdate:updateHandler, ease:Linear.easeNone},0)
+
+      function updateHandler() {
+        if(counter.cValue) $(number).html(counter.cValue)
+      }
+      return tl
+    },
+
     // Reveal Animations 
     detectAnimation() {
       var controller = new ScrollMagic.Controller();
@@ -287,8 +319,12 @@
             .staggerFrom($(elem).find('.title-holder span>span'), 1, {autoAlpha: 0, y: 100, ease: ease},0.1,1.2)
             .from($(elem).find('.title-holder hr'), 0.5, {scaleX: 0, transformOrigin:"left center", ease: ease},1.5)
             .from($(elem).find('.title-holder p'), 0.5, {y: 100, autoAlpha:0, ease: ease},1.4)
+            .staggerFrom($(elem).find('.article-holder>*'), 0.5, {y: 100, autoAlpha:0, ease: ease},0.1,1.6)
             .from($(elem).find('.foot-note'),0.5,{autoAlpha: 0})
             .from($(elem).find('.profile-label'),0.5,{autoAlpha: 0, y: 50, ease: ease})
+            .add(UB.imageGridAnimationX($(elem).find('.cover-holder'), 'to-right'),1.6)
+            .add(UB.circleProgressAnimation($(elem).find('.progress-circle')),1.6)
+            
             
             //.staggerFrom($(elem).find('.grid:nth-child(2),.grid:nth-child(3)'),1,{autoAlpha: 0},0.2,2.6)
             //.from($(elem).find('.ub-logo-holder'),0.5,{autoAlpha:0})
@@ -343,14 +379,14 @@
       nav = $('#main-navigation')
       $('body').addClass('navigation-open')
           tl.to($(nav).find('.navigation-holder'),0.5,{scaleX:1, ease: Power2.easeOut, overwrite:'all'})
-          .staggerTo($(nav).find('.nav-list>li'),0.5,{x: 0, ease: Power2.easeOut, autoAlpha:1, overwrite:'all'},0.1,0.2)
+          .staggerTo($(nav).find('.nav-list li'),0.5,{x: 0, ease: Power2.easeOut, autoAlpha:1, overwrite:'all'},0.1,0.2)
     },
 
     closeNavigation() {
       let tl = new TimelineMax(),
       nav = $('#main-navigation')
       $('body').removeClass('navigation-open')
-          tl.staggerTo($(nav).find('.nav-list>li'),0.5,{x: 200, ease: Power2.easeOut, autoAlpha:0, overwrite:'all'},0.1)
+          tl.staggerTo($(nav).find('.nav-list li'),0.5,{x: 200, ease: Power2.easeOut, autoAlpha:0, overwrite:'all'},-0.1)
           .to($(nav).find('.navigation-holder'),0.5,{scaleX:0, ease: Power2.easeOut, overwrite:'all'},0.2)
     },
 
@@ -378,8 +414,163 @@
         }
       });
     },
+
+    fullPageSliders() {
+      this.settings.fullpage = new fullpage('#main-pages', {
+              navigation: true,
+              licenseKey: '735103E9-29F44E00-854468F3-C91D0430',
+              responsiveWidth: 768,
+              scrollOverflow: true,
+              //anchors: ['home', 'about-us', 'contact'],
+              parallax: true,
+              onLeave: function(origin, destination, direction){
+                  console.log("Leaving section" + origin.index);
+              },
+          });
+    },
+
+    popupGallery(){
+      $('.popup-gallery').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        callbacks: {
+          elementParse: function(item) {
+            // Function will fire for each target element
+            // "item.el" is a target DOM element (if present)
+            // "item.src" is a source that you may modify
+            console.log(item.el.context.dataset.type);
+            if(item.el.context.dataset.type == 'video') {
+              item.type = 'iframe',
+              item.iframe = {
+                 patterns: {
+                   youtube: {
+                     index: 'youtube.com/', // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
+
+                     id: 'v=', // String that splits URL in a two parts, second part should be %id%
+                      // Or null - full URL will be returned
+                      // Or a function that should return %id%, for example:
+                      // id: function(url) { return 'parsed id'; } 
+
+                     src: '//www.youtube.com/embed/%id%?autoplay=1' // URL that will be set as a source for iframe. 
+                   },
+                   vimeo: {
+                     index: 'vimeo.com/',
+                     id: '/',
+                     src: '//player.vimeo.com/video/%id%?autoplay=1'
+                   },
+                   gmaps: {
+                     index: '//maps.google.',
+                     src: '%id%&output=embed'
+                   }
+                 }
+              }
+            } else {
+               item.type = 'image',
+               item.tLoading = 'Loading image #%curr%...',
+               item.mainClass = 'mfp-img-mobile',
+               item.image = {
+                 tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+               }
+            }
+
+          }
+        },
+        gallery: {
+          enabled: true,
+          navigateByImgClick: true,
+          preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+        }
+        
+      });
+    },
+
+    accordian() {
+      let aTrigger = document.querySelectorAll('.accordian-trigger'),
+        aPanel = document.querySelectorAll('.accordian-panel'),
+        expandAll = $('.expand-all'),
+        ease = 'swing',
+        duration = 500,
+        reset = function(wrapper) {
+          let triggers = $(wrapper).find('.accordian-trigger'),
+            panels = $(wrapper).find('.accordian-panel'),
+            items = $(wrapper).find('.accordian-item')
+
+          triggers.removeClass('active')
+          items.removeClass('active')
+          panels.removeClass('active')
+          // panels.each(function() {
+          //   TweenLite.to($(this), 0.8, { maxHeight: 0, ease: Power3.easeInOut })
+          // })
+          panels.slideUp(duration,ease)
+        }
+      // Searching for active panel
+      aPanel.forEach(panel => {
+        if (panel.classList.contains('active')) $(panel).show()
+      })
+
+
+      aTrigger.forEach(trigger => {
+        trigger.addEventListener('click', function() {
+          //reset()
+          let panel = this.nextElementSibling
+          if (this.classList.contains('active')) {
+            this.classList.remove('active')
+            $(this).closest('.accordian-item').removeClass('active')
+            $(panel).removeClass('active')
+            $(panel).slideUp(duration,ease)
+          } else {
+            reset($(this).closest('.accordian-wrapper'))
+            let wrapperPanel = $(this).closest('.accordian-panel')
+            this.classList.add('active')
+            $(this).closest('.accordian-item').addClass('active')
+            $(panel).addClass('active')
+            $(panel).slideDown(duration,ease,function(){
+              if($(trigger).hasClass('quick-link-title')){
+                return
+              }
+              //$('html,body').animate({scrollTop: $(trigger).offset().top - 100},'fast')
+            })
+           //  TweenLite.to(panel, 0.8, { overwrite: "all", maxHeight: panel.scrollHeight, ease: Power3.easeInOut, onComplete: function(){
+              
+           //    if(wrapperPanel.length){
+           //      console.log(wrapperPanel[0].scrollHeight)
+           //      TweenLite.to(wrapperPanel,0.5,{overwrite: "all", maxHeight: wrapperPanel[0].scrollHeight})
+           //    }
+           //   } 
+           // })
+            
+          }
+
+        })
+      })
+
+      expandAll.on('click', function(e){
+        e.preventDefault()
+
+        let parentAccordianWrapper = $(this).closest('.accordian-wrapper')
+
+        if($(this).hasClass('expand-all')){
+          parentAccordianWrapper.find('.accordian-panel').slideDown(duration,ease).addClass('active')
+          parentAccordianWrapper.find('.accordian-item').addClass('active')
+          parentAccordianWrapper.find('.accordian-trigger').addClass('active')
+          $(this).removeClass('expand-all').addClass('collapse-all').html('Collapse all')
+        } else {
+          parentAccordianWrapper.find('.accordian-panel').slideUp(duration,ease).removeClass('active')
+          parentAccordianWrapper.find('.accordian-item').removeClass('active')
+          parentAccordianWrapper.find('.accordian-trigger').removeClass('active')
+          $(this).addClass('expand-all').removeClass('collapse-all').html('Expand all')
+        }
+        
+
+        
+      })
+
+
+    }
   }
 
   UB._init()
+
+  window.UB = UB
 
 })()

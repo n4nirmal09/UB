@@ -2,7 +2,9 @@
 		"./base/mixins";
 
 /* Vendors */
-@import "./vendors/bootstrap/bootstrap";
+@import "./vendors/bootstrap/bootstrap",
+		"./vendors/magnific/main",
+		"./vendors/fullpage/fullpage";
 
 /*!
  * Theme: Urban Weavers theme v1.0
@@ -18,7 +20,10 @@
  		 "./banners",
  		 "./components",
  		 "./image-gallery-grid",
+ 		 "./headers",
  		 "./navigation",
+ 		 "./accordian",
+ 		 "./progress-circle",
  		 "./seperators",
  		 "./utility";
 

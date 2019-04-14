@@ -26,6 +26,10 @@ body{
   h2,.h2 {
     font-size: calculateVw(60px, $screen-full);
   }
+
+  h3,.h3 {
+    font-size: calculateVw(50px, $screen-full);
+  }
 	
   .vw-small{
   	font-size: calculateVw(20px, $screen-full);

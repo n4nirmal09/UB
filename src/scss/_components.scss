@@ -150,3 +150,25 @@
 		border-left: 1px solid
 	}
 }
+
+.list-technologies
+{
+	display: flex;
+	flex-flow: row wrap;
+	list-style: none;
+	padding: 0;
+	> li{
+		padding: 15px;
+		flex: 0 0 50%;
+		max-width: 50%;
+		@include media-breakpoint-up(lg){
+			flex: 0 0 33.33%;
+			max-width: 33.33%;
+		}
+		
+		text-align: center;
+		> strong{
+			display: block;
+		}
+	} 
+}
